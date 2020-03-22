@@ -27,9 +27,13 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DonationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            //services.AddDbContext<DonationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
-            
+            services.AddDbContext<DonationDbContext>(options =>
+                   options.UseMySql(Configuration.GetConnectionString("DevConnection"), builder =>
+builder.MigrationsAssembly("WebAPI")));
+
+
 
         }
 
