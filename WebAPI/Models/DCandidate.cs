@@ -22,7 +22,7 @@ namespace WebAPI.Models
         [Column(TypeName = "nvarchar(100)")]
         public string Email { get; set; }
 
-        [Column(TypeName = "nvarchar(3)")]
+        
         public int Age { get; set; }
 
         [Column(TypeName = "nvarchar(3)")]
