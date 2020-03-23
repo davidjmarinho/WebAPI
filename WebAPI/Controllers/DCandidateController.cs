@@ -24,14 +24,14 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DCandidate>>> GetDCandidate()
         {
-            return await _context.DCandidate.ToListAsync();
+            return await _context.DCandidates.ToListAsync();
         }
 
         // GET: api/DCandidate/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DCandidate>> GetDCandidate(int id)
         {
-            var dCandidate = await _context.DCandidate.FindAsync(id);
+            var dCandidate = await _context.DCandidates.FindAsync(id);
 
             if (dCandidate == null)
             {
@@ -47,11 +47,8 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDCandidate(int id, DCandidate dCandidate)
         {
-            if (id != dCandidate.Id)
-            {
-                return BadRequest();
-            }
-
+            dCandidate.id = id;
+                       
             _context.Entry(dCandidate).State = EntityState.Modified;
 
             try
@@ -79,23 +76,23 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<DCandidate>> PostDCandidate(DCandidate dCandidate)
         {
-            _context.DCandidate.Add(dCandidate);
+            _context.DCandidates.Add(dCandidate);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDCandidate", new { id = dCandidate.Id }, dCandidate);
+            return CreatedAtAction("GetDCandidate", new { id = dCandidate.id }, dCandidate);
         }
 
         // DELETE: api/DCandidate/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<DCandidate>> DeleteDCandidate(int id)
         {
-            var dCandidate = await _context.DCandidate.FindAsync(id);
+            var dCandidate = await _context.DCandidates.FindAsync(id);
             if (dCandidate == null)
             {
                 return NotFound();
             }
 
-            _context.DCandidate.Remove(dCandidate);
+            _context.DCandidates.Remove(dCandidate);
             await _context.SaveChangesAsync();
 
             return dCandidate;
@@ -103,7 +100,7 @@ namespace WebAPI.Controllers
 
         private bool DCandidateExists(int id)
         {
-            return _context.DCandidate.Any(e => e.Id == id);
+            return _context.DCandidates.Any(e => e.id == id);
         }
     }
 }

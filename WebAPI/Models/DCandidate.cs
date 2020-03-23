@@ -10,7 +10,7 @@ namespace WebAPI.Models
     public class DCandidate
     {   
         [Key]
-        public int Id { get; set; }
+        public int id { get; set; }
 
 
         [Column(TypeName = "nvarchar(60)")]
